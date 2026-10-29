@@ -1,0 +1,152 @@
+{
+ "primary_metric": "macro_f1",
+ "direction": "max",
+ "metric_labels": {
+  "macro_f1": "macro-F1",
+  "accuracy": "exactitude",
+  "parent_accuracy": "exactitude du niveau parent",
+  "parent_child_consistency": "cohérence parent-enfant",
+  "expected_calibration_error": "ECE après recalibration",
+  "ece_uncalibrated": "ECE avant recalibration",
+  "brier_score": "score de Brier",
+  "option_order_agreement": "accord sous permutation des options",
+  "latency_ms_per_example": "latence p50 (ms)"
+ },
+ "dataset": {
+  "name": "mteb/amazon_massive_intent",
+  "config": "fr",
+  "split": "test",
+  "n_examples": 200
+ },
+ "approaches": [
+  {
+   "name": "CamemBERT-base fine-tuné",
+   "role": "reference",
+   "metrics": {
+    "macro_f1": 0.0035460992907801418,
+    "accuracy": 0.09,
+    "parent_accuracy": 0.07,
+    "parent_child_consistency": 0.0,
+    "expected_calibration_error": 0.027685799935251776,
+    "ece_uncalibrated": 0.06953316095080132,
+    "brier_score": 0.9749182223389781,
+    "option_order_agreement": null,
+    "latency_ms_per_example": 49.14
+   },
+   "ci95": {
+    "macro_f1": [
+     0.002619047619047619,
+     0.0058997050147492625
+    ],
+    "accuracy": [
+     0.055,
+     0.135
+    ],
+    "parent_accuracy": [
+     0.035,
+     0.105
+    ],
+    "parent_child_consistency": [
+     0.0,
+     0.0
+    ],
+    "expected_calibration_error": [
+     0.00225387593479795,
+     0.07217312453626432
+    ],
+    "ece_uncalibrated": [
+     0.03455668085529956,
+     0.11450798188870148
+    ],
+    "brier_score": [
+     0.9707164464544948,
+     0.9785304050811695
+    ]
+   },
+   "latency_ms": {
+    "p50": 49.14,
+    "p95": 57.07
+   },
+   "notes": "1 époque(s) sur 300 textes ; température 0.15 ajustée sur la validation ; parent obtenu par somme des probabilités des enfants."
+  },
+  {
+   "name": "Décision typée hiérarchique par LLM",
+   "role": "new",
+   "metrics": {
+    "macro_f1": 0.07213607490763146,
+    "accuracy": 0.1,
+    "parent_accuracy": 0.165,
+    "parent_child_consistency": null,
+    "expected_calibration_error": 0.041842331036795445,
+    "ece_uncalibrated": 0.4238440469197945,
+    "brier_score": 0.9734332269420708,
+    "option_order_agreement": 0.075,
+    "latency_ms_per_example": 1306.13
+   },
+   "ci95": {
+    "macro_f1": [
+     0.04916517590936196,
+     0.09917828167256085
+    ],
+    "accuracy": [
+     0.06,
+     0.14
+    ],
+    "parent_accuracy": [
+     0.115,
+     0.215
+    ],
+    "expected_calibration_error": [
+     0.010823653338858909,
+     0.08318955312029565
+    ],
+    "ece_uncalibrated": [
+     0.38187127737742016,
+     0.4685488476709592
+    ],
+    "brier_score": [
+     0.9663417509458678,
+     0.9801259110084055
+    ],
+    "option_order_agreement": [
+     0.025,
+     0.13333333333333333
+    ]
+   },
+   "latency_ms": {
+    "p50": 1306.13,
+    "p95": 1406.3
+   },
+   "notes": "Zéro-shot, Qwen/Qwen2.5-0.5B-Instruct ; température 6.38 ; sorties illisibles 0.0% ; accord d'ordre sur 40 textes × 3 permutations ; cohérence parent-enfant garantie par construction."
+  }
+ ],
+ "phase": "public",
+ "scale": "reduced",
+ "seed": 42,
+ "date": "2026-10-29T08:13:25+00:00",
+ "environment": {
+  "python": "3.12.16",
+  "system": "Linux-7.0.0-1017-azure-x86_64-with-glibc2.41",
+  "cpu": 4,
+  "ram_gb": 15.6,
+  "device": "cpu",
+  "gpu": null,
+  "scale": "reduced",
+  "versions": {
+   "torch": "2.15.0+cpu",
+   "transformers": "5.21.0",
+   "datasets": "5.1.0",
+   "sentence-transformers": "6.2.0",
+   "scikit-learn": "1.9.1",
+   "numpy": "2.5.4",
+   "pandas": "3.1.0",
+   "openai": "3.41.0",
+   "xgboost": "3.4.1"
+  }
+ },
+ "service_calls": {
+  "n": 0,
+  "failures": 0,
+  "seconds": 0
+ }
+}
